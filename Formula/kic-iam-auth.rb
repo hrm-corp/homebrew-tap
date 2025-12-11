@@ -3,7 +3,7 @@ class KicIamAuth < Formula
   homepage "https://github.com/hrm-corp/kic-iam-auth"
   on_macos do
     if Hardware::CPU.arm?
-      url "https://objectstorage.kr-central-2.kakaocloud.com/v1/fe631cd1b7a14c0ba2612d031a8a5619/public/docs/binaries-kic-iam-auth/Mac%20ARM_64%2064Bit/kic-iam-auth"
+      url "https://objectstorage.kr-central-2.kakaocloud.com/v1/c11fcba415bd4314b595db954e4d4422/public/docs/binaries-kic-iam-auth/Mac%20ARM_64%2064Bit/kic-iam-auth"
       sha256 "4cdaad7e73681a6a0dc447dc4cf7b5f5ba791f10a63473b38f11959ca72debf8"
     end
     if Hardware::CPU.intel?
