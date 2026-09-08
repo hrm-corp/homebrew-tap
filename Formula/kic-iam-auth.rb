@@ -7,7 +7,7 @@ class KicIamAuth < Formula
       sha256 "4cdaad7e73681a6a0dc447dc4cf7b5f5ba791f10a63473b38f11959ca72debf8"
     end
     if Hardware::CPU.intel?
-      url "https://objectstorage.kr-central-2.kakaocloud.com/v1/fe631cd1b7a14c0ba2612d031a8a5619/public/docs/binaries-kic-iam-auth/Mac%20x86_64%2064Bit/kic-iam-auth"
+      url "https://objectstorage.kr-central-2.kakaocloud.com/v1/c11fcba415bd4314b595db954e4d4422/public/docs/binaries-kic-iam-auth/Mac%20x86_64%2064Bit/kic-iam-auth"
       sha256 "5136d1d56f31e92a8a1ee69fae2bcb1d5e16b6b8a439c32bad72219ee725c5b4"
     end
   end
@@ -27,7 +27,10 @@ class KicIamAuth < Formula
   end
 
   test do
-    output = shell_output("#{bin}/kic-iam-auth version")
-    assert_match %Q("An error occurred when creating openstack client: Missing input for argument [auth_url]"), output
+    # The binary initializes authentication even for `version`; without an
+    # auth URL it must fail locally, without contacting the cloud or using keys.
+    ENV.delete("OS_AUTH_URL")
+    output = shell_output("#{bin}/kic-iam-auth version 2>&1", 1)
+    assert_match "Missing input for argument [auth_url]", output
   end
 end
